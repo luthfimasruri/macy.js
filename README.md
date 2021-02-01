@@ -14,13 +14,22 @@ Install with Bower:
 bower install macy
 ```
 
-Include via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/macy):
+## Usage
+
+Manually [Download](https://github.com/bigbitecreative/macy.js/archive/master.zip) the script and link `dist/macy.js` in your HTML:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
+<script src="macy.js"></script>
 ```
 
-## Usage
+Or Import ES Module in a module bundler:
+
+```javascript
+import Macy from 'macy';
+```
+
+Now you can start using Macy:
+
 ```javascript
 var macyInstance = Macy({
   // See below for all available options.
@@ -51,10 +60,6 @@ Adjust the margin between columns with a pixel value. Don’t forget you can sti
 
 Added in v2.1 you can now have an object for margin. This is optional you can set the margin property to just a number and macy will use it for both. But if you would like to add a different xMargin or yMargin then you can do so like this
 
-Added in v2.4 you can now set the x property to be a percentage based value, in addition to this, the x property can use other unit types. 
-
-**Note:** Due to the way the container height is calculated, using anything other than integer in the Y property will cause an error. 
-
 ```
 margin: {
   x: 10,
@@ -79,7 +84,7 @@ Set this to true if you would prefer to use a different image loaded library.
 #### **mobileFirst**
 *Default: `false`*
 
-Setting this value to true will alter how the breakAt options will work. Macy will now work in a mobile first way so the default `columns` will be the default then if for example you have `400: 2` in your breakAt object, if the document is greater or equal to 400px the column count will be 2. 
+Setting this value to true will alter how the breakAt options will work. Macy will now work in a mobile first way so the default `columns` will be the default then if for example you have `400: 2` in your breakAt object, if the document is greater or equal to 400px the column count will be 2.
 
 #### **breakAt**
 
@@ -89,9 +94,9 @@ If the viewport resizes after the page has loaded, Macy will rerun to ensure opt
 
 If the column is set to one then Macy will remove all styling to leave you to style it perfectly on mobile.
 
-Added in v2.1 breakAt now supports changing margin within these breakpoints. 
+Added in v2.1 breakAt now supports changing margin within these breakpoints.
 
-For example 
+For example
 
 ```
 {
@@ -123,14 +128,6 @@ If you do not need the modify the margin you can leave it as `760: 4` and macy w
 ```
 
 This would change the xMargin to 20px when screens are smaller than 760, but the instance will use a previously declared y value.
-
-
-#### **cancelLegacy**
-
-_Default: `false`_ - If enabled this will cause the script to not run on browsers that don't support native Promises and when there isn't a polyfill present. 
-
-#### **useContainerForBreakpoints**
-_Default: `false`_ - When enabled the breakpoint options are based on the container elements width instead of the document width.
 
 ## Methods
 
@@ -168,7 +165,7 @@ macyInstance.recalculate();
 
 #### **runOnImageLoad**
 
-*Parameters: `{Function} - Function to run on image load` & `{Boolean} If true it will run everytime an image loads`*
+*Parameters: `{Function} - Function to run on image load` & `{Boolean} If true it will run everytime an image loadsl`*
 
 runOnImageLoad is a method used to do something each time and image loads or after all images have been loaded. This helps when using Ajax to make sure the layout is worked out correctly when images are loading. Using this in conjunction with the recalculate function makes your layouts look great no matter how long it takes to load in your images:
 
@@ -178,7 +175,7 @@ macyInstance.runOnImageLoad(function () {
 }, true);
 ```
 
-If you only require it to run once all the images have loaded you can achieve this by ommiting the second parameter as this defaults to false:
+If you only require it to run once all the images have loaded you can acheive this by passing null as the first parameter:
 
 ```javascript
 macyInstance.runOnImageLoad(function () {
@@ -193,17 +190,6 @@ If you only require the during function to run then only pass it one function:
 macyInstance.runOnImageLoad(function () {
   console.log('Every time an image loads I get fired');
   macyInstance.recalculate(true);
-}, true);
-```
-
-The callback function receives an event as its first and only property, if you are running the callback on every image load then the function has access to the image that has just loaded.
-
-```javascript
-macyInstance.runOnImageLoad(function (event) {
-  if (event.data.img) {
-    // note: this parameter can be undefined if it is the final completion event that is emitted.
-    console.log(event.data.img);
-  }
 }, true);
 ```
 
@@ -231,7 +217,7 @@ macyInstance.reInit();
 
 This would console log when all images are loaded.
 ```javascript
-macyInstance.on(macyInstance.constants.EVENT_IMAGE_COMPLETE, function (ctx) {
+macyInstance.on(macyInstance.constants.EVENT_IMAGE_COMPLETE. function (ctx) {
   console.log('all images have loaded');
 });
 ```
